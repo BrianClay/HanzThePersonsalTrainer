@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Huge</title>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="scripts/hanz.js"></script>
+    <script src="scripts/hanzFilters.js"></script>
+    <script src="scripts/hanzDirectives.js"></script>
+    <script src="scripts/LoginCtrl.js"></script>
+    <script src="scripts/homeController.js"></script>
+</head>
+<body>
+<div ng-app="Hanz" ng-init="Person='Brian'">
+    <div ng-controller="LoginCtrl as login"><div ng-if="!login.User">
+        <input type="text" placeholder="Username" ng-model="login.Username">
+        <input type="password" placeholder="Password" ng-model="login.Password">
+        <button ng-click="login.Login()">Login</button>
+        </div>
+        <div ng-if="login.User">
+            Logged In : {{login.User.Name}}
+        </div>
+    </div>
+    <div ng-controller="HomeCtrl">
+        <h1>{{Message}}</h1>
+        <input type="text" placeholder="Search" ng-model="SearchFilter"/>
+        <input type="text" placeholder="Exercise name" ng-model="NewExercise.Name"/>
+        <input type="number" ng-model="NewExercise.Time"/>
+        <button ng-click="AddExercise()" ng-disabled="(!NewExercise.Name || NewExercise.Name.length===0) ||(!NewExercise.Time || NewExercise.Time<0)">Add</button>
+        <button ng-click="NewExercise=null" ng-show="NewExercise.Name ||(NewExercise.Time && NewExercise.Time>0)">Clear</button>
+       <exercises items="Exercises"></exercises>
+    </div>{{Person}}
+</div>
+
+</body>
+</html>
